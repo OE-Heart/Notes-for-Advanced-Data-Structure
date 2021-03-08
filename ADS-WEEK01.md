@@ -82,13 +82,14 @@
 - **Step3**: $FindMax ( T_L ) $ and the largest element will be the root of TL , and has no right child
 - **Step4**: Make $T_R$ the right child of the root of $T_L$
 
-### 1.3 Amortized Analysis
+### 1.3 Amortized Analysis 摊还分析
 
 - **Target**: Any $M$ consecutive operations take at most $O(M log N)$ time. — **Amortized** time bound
 - worst-case bound $\geq$ **amortized bound** $\geq$ average-case bound
 - Probability is not involved in amortized bound
+- 摊还分析可以保证最坏情况下每个操作的平均性能
 
-#### Aggregate analysis 总量分析
+#### Aggregate analysis 聚合分析
 
 - **Idea**: Show that for all $n$, a sequence of $n$ operations takes **worst-case** time $T(n)$ in total. In the worst case, the average cost, or **amortized cost**, per operation is therefore $T(n)/n$.
 
@@ -96,10 +97,12 @@
 
 - We can pop each object from the stack **at most once** for each time we have pushed it onto the stack
 
-#### Accounting method 会计法
+#### Accounting method 核算法
 
 - **Idea**: When an operation’s **amortized cost** $\hat c_i$ exceeds its **actual cost** $c_i$, we assign the difference to specific objects in the data structure as **credit**. Credit can help **pay** for later operations whose amortized cost is less than their actual cost.
 
+- The amortized costs of the operations may **differ** from each other.
+  
 - For all sequences of $n$ operations, we have
   $$
   \sum^n_{i=1}\hat c_i\geq \sum^n_{i=1}c_i
@@ -110,8 +113,6 @@
   $$
 
 <img src="picture/image-20210304171631233.png" alt="image-20210304171631233" style="zoom:80%;" />
-
-- The amortized costs of the operations may **differ** from each other
 
 #### Potential method 势能法
 
@@ -126,3 +127,35 @@ $$
 - A good potential function should always assume its minimum at the start of the sequence
 
 <img src="picture/image-20210304173426195.png" alt="image-20210304173426195" style="zoom:80%;" />
+
+##### Splay Trees势能分析
+
+- 势能函数是树中所有节点的rank之和
+  $$
+  \Phi(T)=\sum^n_{i=1}\log S(i)
+  $$
+  其中$S(i)$指的是子树$i$中的节点数(包括节点$i$)，用$R(i)$表示节点$i$的rank，$R(i)=\log S(i)$
+
+- 用$R_2$表示操作后的势能，$R_1$表示操作前势能
+
+<img src="picture/image-20210307165318849.png" alt="image-20210307165318849" style="zoom:80%;" />
+
+- zig
+  - 实际成本是一次单旋，为1
+  - 只有$X$和$P$的rank值有变化，故$\hat c_i = 1 + R_2(X) − R_1(X) + R_2(P) − R_1(P)$
+  - 节点$P$ 由根节点变为非根节点，故$R_2(P)-R_1(P)\leq0$，因此$\hat c_i\leq 1+R_2(X)-R_1(X)\leq 1+3(R_2(X)-R_1(X))$
+- zig-zag
+  - 实际成本是两次旋转，为2
+  - $\hat c_i = 2 + R_2(X) − R_1(X) + R_2(P) − R_1(P)+R_2(G) − R_1(G)$
+  - 操作前$G$是根节点，操作后$X$是根节点，rank相同，故$\hat c_i = 2− R_1(X) + R_2(P) − R_1(P)+R_2(G)$
+  - $R_1(P)\geq R_1(X)$
+  - $S_2(P)+S_2(G)\leq S_2(X)$，根据定理可得$R_2(P)+R_2(G)\leq 2R_2(X)-2$
+  - $\hat c_i\leq2(R_2(X)-R_1(X))$
+- zig-zig
+  - 实际成本是两次单旋，为2
+  - $\hat c_i = 2 + R_2(X) − R_1(X) + R_2(P) − R_1(P)+R_2(G) − R_1(G)$
+  - 操作前$G$是根节点，操作后$X$是根节点，rank相同，故$\hat c_i = 2− R_1(X) + R_2(P) − R_1(P)+R_2(G)$
+  - $R_1(P)\geq R_1(X)$
+  - $R_2(G)\leq R_2(P)\leq R_2(X)$
+  - $\hat c_i\leq2(R_2(X)-R_1(X))+2\leq3(R_2(X)-R_1(X))$
+- **[Theorem]** The amortized time to splay a tree with root $T$ at node $X$ is at most $3( R( T ) – R ( X ) ) + 1 = O(log N)$.
