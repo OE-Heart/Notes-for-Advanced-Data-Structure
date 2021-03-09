@@ -38,6 +38,7 @@
 - **Delete a degree 2 node**:
   - Replace the node by the **largest** one in its **left** subtree or the **smallest** one in its **right** subtree
   - Delete the replacing node from sub tree
+- Must add 1 black node to the path of the replacing node.
 
 ![image-20210309145212684](picture/image-20210309145212684.png)
 
@@ -47,7 +48,18 @@
 
 ![image-20210309145254126](picture/image-20210309145254126.png)
 
+> Note: $x$ is the location of the node to be deleted initially, and a black node needs to be added to the path of $x$.
 
+#### Red-Black Trees VS AVL Trees
+
+- Number of rotations
+
+|               | Red-Black Trees |  AVL Trees  |
+| :-----------: | :-------------: | :---------: |
+| **Insertion** |     $\leq2$     |   $\leq2$   |
+| **Deletion**  |     $\leq3$     | $O(\log N)$ |
+
+- AVL Trees is faster for search time because the tree height is smaller.
 
 ### 2.2 B+ Trees
 
