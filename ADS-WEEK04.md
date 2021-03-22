@@ -148,4 +148,3 @@ $$
 $$
 l=O(\log N) \rarr T_{amortized}=O(\log N)
 $$
-
