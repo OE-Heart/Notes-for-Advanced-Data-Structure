@@ -155,6 +155,10 @@ $$
 
 - iterative version
 
+  ![image-20210323205612702](picture/image-20210323205612702.png)
+
+  ![image-20210323205631230](picture/image-20210323205631230.png)
+
 > Note: 
 >
 > - Skew heaps have the advantage that **no extra space** is required to maintain path lengths and **no tests** are required to determine when to swap children.
