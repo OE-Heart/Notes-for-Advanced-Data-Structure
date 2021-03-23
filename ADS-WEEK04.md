@@ -23,8 +23,8 @@
 
 > Note: The leftist tree of $N$ nodes has a right path containing at most $\lfloor\log_2(N+1)\rfloor$ nodes.
 
-- We can perform all the work on the right pat, which is guaranteed to be short
-- Trouble makers: Insert and Merge
+- We can perform all the work on the right path, which is guaranteed to be short
+- Trouble makers: Insert and Merge may destroy leftist heap property
 
 > Note: Insertion is merely a special case of merging.
 
@@ -96,10 +96,46 @@ $$
 
   <img src="picture/image-20210322110733901.png" alt="image-20210322110733901" style="zoom:80%;" />
 
+#### Insert
+
+```c
+PriorityQueue Insert1(ElementType X, PriorityQueue H)
+{
+	PriorityQueue SingleNode;
+	SingleNode = malloc(sizeof(struct TreeNode));
+	if( SingleNode == NULL)
+		Fatal Error("Out of space!!!") ;
+	else
+	{ 
+        SingleNode->Element = X;
+        SingleNode->Npl = 0;
+		SingleNode->Left = SingleNode->Right = NULL;
+		H = Merge(SingleNode, H);
+	}
+	return H;
+}
+```
+
 #### DeleteMin
 
 - Step 1: Delete the root
 - Step 2: Merge the two subtrees
+
+```c
+PriorityQueue DeleteMin1(PriorityQueue H)
+{
+	PriorityQueue LeftHeap, RightHeap;
+	if(Is Empty(H))
+	{
+		Error("Priority queue is empty" ");
+		return H;
+	}
+	LeftHeap = H->Left;
+	RightHeap = H->Right;
+	free (H);
+	return Merge(LeftHeap, RightHeap);
+}
+```
 
 $$
 T_p=O(\log N)
@@ -108,6 +144,7 @@ $$
 ### 4.2 Skew Heaps
 
 - a simple version of the leftist heaps
+- 斜堆的右路径在任何时刻都可以任意长，所有操作的最坏情形运行时间均为$O(N)$
 - **Target**: Any $M$ consecutive operations take at most $O(M \log N)$ time.
 
 #### Merge
