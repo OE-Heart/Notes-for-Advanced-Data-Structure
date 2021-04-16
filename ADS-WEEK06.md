@@ -135,3 +135,36 @@ bool Backtracking (int i)
   <img src="picture/image-20210416122937045.png" alt="image-20210416122937045" style="zoom:80%;" />
 
   Smaller $S_i$ first so we can cut a larger subtree if one doesn’t work
+
+### 6.5 Tic-tac-toe
+
+- The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.
+
+<img src="picture/image-20210416154331024.png" alt="image-20210416154331024" style="zoom:80%;" />
+
+#### Minimax Strategy
+
+- Use an evaluation function to quantify the "**goodness**" of a position
+  $$
+  f(P)=W_{Computer}-W_{Human}
+  $$
+  where $W$ is the number of potential wins at position $P$
+
+  <img src="picture/image-20210416154618355.png" alt="image-20210416154618355" style="zoom:80%;" />
+
+- The **human** is trying to **minimize** the value of the position $P$, while the **computer** is trying to **maximize** it
+
+<img src="picture/image-20210416155036395.png" alt="image-20210416155036395" style="zoom:80%;" />
+
+#### $\alpha$ pruning
+
+<img src="picture/image-20210416155440388.png" alt="image-20210416155440388" style="zoom:80%;" />
+
+#### $\beta$  pruning
+
+<img src="picture/image-20210416155534378.png" alt="image-20210416155534378" style="zoom:80%;" />
+
+#### $\alpha$-$\beta$ pruning
+
+- When both $\alpha$ pruning and $beta$ pruning techniques are combined
+- In practice, it limits the searching to only $O(\sqrt N)$ nodes, where $N$ is the size of the full game tree
