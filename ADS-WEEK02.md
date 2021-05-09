@@ -16,12 +16,12 @@
 - If a node is red, then both its children are black
 - For each node, all simple paths from the node to descendant leaves contain the same number of black nodes
 
-#### [Definition] The *black-height* of any node $x$, denoted by $bh(x)$, is the number of black nodes on any simple path from $x$ ($x$ not included) down to a leaf.  $bh(Tree) = bh(root)$.
+#### [Definition] The *black-height* of any node $x$, denoted by $\text{bh}(x)$, is the number of black nodes on any simple path from $x$ ($x$ not included) down to a leaf.  $\text{bh}(\text{Tree}) = \text{bh}(\text{root})$.
 
 #### [Lemma] **A red-black tree with** $N$ **internal nodes has height at most** $2\ln(N +1)$.
 
-- For any node $x$, $sizeof(x) \geq 2^{bh(x)} – 1$.  Proved by induction.
-- $bh(Tree) \geq h(Tree) / 2  $
+- For any node $x$, $\text{sizeof}(x) \geq 2^{\text{bh}(x)} – 1$.  Proved by induction.
+- $\text{bh}(\text{Tree}) \geq \text{h}(\text{Tree}) / 2  $
 
 #### Insert
 
@@ -33,7 +33,8 @@
 
 #### Delete
 
-- **Delete a leaf node**: Reset its parent link to NIL
+- **Delete a leaf node**: Reset its parent link to NIL and adjust only if the node is black
+
 - **Delete a degree 1 node**: Replace the node by its single child
 - **Delete a degree 2 node**:
   - Replace the node by the **largest** one in its **left** subtree or the **smallest** one in its **right** subtree
@@ -93,11 +94,11 @@ Btree Insert ( ElementType X,  Btree T )
 ```
 
 $$
-Depth(M,N)=O(\lceil\log_{\lceil M/2\rceil}N\rceil)
+\text{Depth}(M,N)=O(\lceil\log_{\lceil M/2\rceil}N\rceil)
 $$
 
 $$
-T_{Find}(M,N)=O(\log N)
+T_\text{Find}(M,N)=O(\log N)
 $$
 
 > Note: The best choice of $M$ is **3** or **4**.

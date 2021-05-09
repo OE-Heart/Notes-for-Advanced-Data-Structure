@@ -17,6 +17,8 @@
 
 #### [Definition] The *leftist heap property* is that for every node X in the heap, the null path length of the left child is *at least as large as* that of the right child.
 
+<img src="picture/image-20210508184648676.png" alt="image-20210508184648676" style="zoom:67%;" />
+
 - The tree is biased to get deep toward the left.
 
 #### [Theorem] A leftist tree with $r$ nodes on the right path must have at least $2^r – 1$ nodes.
@@ -35,7 +37,7 @@ struct TreeNode
 { 
 	ElementType	Element;
 	PriorityQueue Left;
-	PriorityQueue ight;
+	PriorityQueue Right;
 	int Npl;
 };
 ```
@@ -163,6 +165,10 @@ $$
 >
 > - Skew heaps have the advantage that **no extra space** is required to maintain path lengths and **no tests** are required to determine when to swap children.
 > - It is an open problem to determine precisely the **expected right path** length of both leftist and skew heaps.
+
+<img src="picture/image-20210508195454584.png" alt="image-20210508195454584" style="zoom:80%;" />
+
+<img src="picture/image-20210508235921408.png" alt="image-20210508235921408" style="zoom:80%;" />
 
 #### Amortized Analysis for Skew Heaps
 

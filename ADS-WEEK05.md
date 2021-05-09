@@ -24,10 +24,10 @@
 
 #### FindMin
 
-- The minimum key is in one of then **roots**.
+- The minimum key is in one of the **roots**.
 - There are at most $\lceil \log N\rceil$ roots, hence $T_p=O(\log N)$.
 
-> Note: We can remember the minimum and update whenever it is changed.  Then this operation will take **O(1)**.
+> Note: We can remember the minimum and update whenever it is changed. Then this operation will take **O(1)**.
 
 #### Merge
 
@@ -45,7 +45,7 @@
 
 > Note:
 >
-> - If the smallest nonexistent binomial tree is $B_i$ , then $T_p = Const \cdot(i + 1)$.
+> - If the smallest nonexistent binomial tree is $B_i$ , then $T_p = \text{Const} \cdot(i + 1)$.
 > - Performing $N$ **Inserts** on an initially empty binomial queue will take $O(N)$ worst-case time.  Hence the **average** time is **constant**.
 
 #### DeleteMin
@@ -77,7 +77,6 @@
   $$
   T_p=O(\log N)
   $$
-  
 
 ### 5.3 Implementation
 
@@ -86,7 +85,7 @@
 | Operation |                  Property                   |                           Solution                           |
 | :-------: | :-----------------------------------------: | :----------------------------------------------------------: |
 | DeleteMin |      Find all the **subtrees** quickly      |        **Left-child-next-sibling** with linked lists         |
-|   Merge   | The children are **ordered** by their sizes | The next tree will be th largest. Hence maintain the subtrees in **decreasing** sizes |
+|   Merge   | The children are **ordered** by their sizes | The next tree will be the largest. Hence maintain the subtrees in **decreasing** sizes |
 
 ```c
 typedef struct BinNode *Position;
@@ -137,7 +136,7 @@ BinQueue Merge( BinQueue H1, BinQueue H2 )
 	if ( H1->CurrentSize+H2->CurrentSize > Capacity ) 
         ErrorMessage();
 	H1->CurrentSize += H2->CurrentSize;
-	for ( i=0, j=1; j<= H1->CurrentSize; i++, j*=2 ) 
+	for ( i = 0, j = 1; j <= H1->CurrentSize; i++, j *= 2 ) 
     /*i and j are the index and size of the tree separately*/
     {
 	    T1 = H1->TheTrees[i]; T2 = H2->TheTrees[i]; /*current trees*/

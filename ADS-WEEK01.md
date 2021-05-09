@@ -6,7 +6,7 @@
 
 - **Target**: Speed up searching (with insertion and deletion)
 - **Tool**: Binary search trees
-- **Problem**: Although $T_p = O( height )$, but the height can be as bad as $O( N )$
+- **Problem**: Although $T_p = O( \text{height} )$, but the height can be as bad as $O( N )$
 
 #### [Definition] An empty binary tree is height balanced. If $T$ is a nonempty binary tree with $T_L$ and $T_R$ as its left and right subtrees, then $T$ is *height balanced* if and only if
 
@@ -54,11 +54,11 @@
 
 ### 1.2 Splay Trees
 
-- **Target**: Any $M$ consecutive tree operations starting from an empty tree take at most $O(M log N)$ time.
+- **Target**: Any $M$ consecutive tree operations starting from an empty tree take at most $O(M \log N)$ time.
 
-> Note: AVL Tree is a kind of Splay Tree because every operation takes $O(log N)$ time.
+> Note: AVL Tree is a kind of Splay Tree because every operation takes $O(\log N)$ time.
 
-- Splay Tree only means that the **amortized** time is $O(log N)$. A single operation might still take $O(N)$ time.
+- Splay Tree only means that the **amortized** time is $O(\log N)$. A single operation might still take $O(N)$ time.
 - The bound is weaker. But the effect is the same: There are **no bad** input sequences.
 - Whenever a node is accessed, it must be moved to avoid the case of successive operations taking $O(N)$ time.
 - **Idea**: After a node is accessed, it is pushed to the root by a series of AVL tree rotations.
@@ -73,7 +73,11 @@
 
 <img src="picture/image-20210304160411876.png" alt="image-20210304160411876" style="zoom:80%;" />
 
+> Note: The operation order of one Zig-zig is from up to down.
+
 - Splaying not only moves the accessed node to the root, but also roughly halves the depth of most nodes on the path.
+
+<img src="picture/image-20210508163912256.png" alt="image-20210508163912256" style="zoom:80%;" />
 
 #### Deletions
 
@@ -101,7 +105,7 @@
 
 - **Idea**: When an operation’s **amortized cost** $\hat c_i$ exceeds its **actual cost** $c_i$, we assign the difference to specific objects in the data structure as **credit**. Credit can help **pay** for later operations whose amortized cost is less than their actual cost.
 
-- The amortized costs of the operations may **differ** from each other.
+- The difference between aggregate analysis and accounting method is that the later one assumes that the amortized costs of the operations may **differ** from each other
   
 - For all sequences of $n$ operations, we have
   $$
@@ -116,23 +120,26 @@
 
 #### Potential method 势能法
 
-- **Idea**: Take a closer look at the **credit** — $\hat c_i-c_i=Credit_i=\Phi(D_i)-\Phi(D_{i-1})$
+- **Idea**: Take a closer look at the **credit** — $\hat c_i-c_i=\text{Credit}_i=\Phi(D_i)-\Phi(D_{i-1})$
 - $D_i$ id defined to be the structure of the current situation
 - Potential function maps the current structure of the problem into a number
 
 $$
-\Phi(D_i)-\Phi(D_{i-1})\sum^n_{i=1}\hat c_i=\sum^n_{i=1}(c_i+\Phi(D_i)-\Phi(D_{i-1}))=\sum^n_{i=1}c_i+\Phi(D_n)-\Phi(D_0)
+\hat c_i=c_i+\Phi(D_i)-\Phi(D_{i-1})\\
+\sum^n_{i=1}\hat c_i=\sum^n_{i=1}(c_i+\Phi(D_i)-\Phi(D_{i-1}))=\sum^n_{i=1}c_i+\Phi(D_n)-\Phi(D_0)
 $$
 
 - A good potential function should always assume its minimum at the start of the sequence
 
 <img src="picture/image-20210304173426195.png" alt="image-20210304173426195" style="zoom:80%;" />
 
+<img src="picture/image-20210508163951860.png" alt="image-20210508163951860" style="zoom:80%;" />
+
 ##### Splay Trees势能分析
 
 - 势能函数是树中所有节点的rank之和
   $$
-  \Phi(T)=\sum^n_{i=1}\log S(i)
+  \Phi(T)=\sum^n_{i=1}R(i)=\sum^n_{i=1}\log S(i)
   $$
   其中$S(i)$指的是子树$i$中的节点数(包括节点$i$)，用$R(i)$表示节点$i$的rank，$R(i)=\log S(i)$
 

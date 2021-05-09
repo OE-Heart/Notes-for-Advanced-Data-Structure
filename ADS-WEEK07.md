@@ -100,13 +100,14 @@ $$
     $$
     T(N)=2T(\lfloor N/2\rfloor)+N\leq2c\lfloor N/2\rfloor\log\lfloor N/2\rfloor+N\leq cN(\log N-\log2)+N\leq cN\log N(c\geq1)
     $$
-    
-
+  
 - Must prove the **exact form**
+
+  <img src="picture/image-20210509110533347.png" alt="image-20210509110533347" style="zoom: 67%;" />
 
 #### Recursion-tree Method
 
-![image-20210424220934390](picture/image-20210424220934390.png)
+<img src="picture/image-20210424220934390.png" alt="image-20210424220934390" style="zoom: 80%;" />
 $$
 T(N)=\sum^{\log_4N-1}_{i=0}(\frac3{16})^icN^2+\Theta(N^{\log_43})<\sum^\infin_{i=0}(\frac3{16})^icN^2+\Theta(N^{\log_43})=\frac{cN^2}{1-3/16}+\Theta(N^{\log_43})=O(N^2)
 $$
@@ -120,4 +121,31 @@ $$
 
 
 #### Master Method
+
+##### [Master Theorem] Let $a\geq 1$ and $b > 1$ be constants, let $f(N)$ be a function, and let $T(N)$ be defined on the nonnegative integers by the recurrence $T(N)=aT(N/b)+f(N)$, then:
+
+1. If $f(N)=O(N^{\log_b {a-\delta}})$ for some constant $\delta>0$, then $T(N)=\Theta(N^{\log_b a})$
+3. If $f(N)=\Omega(N^{\log_b a+\delta})$ for some constant $\delta>0$, and if $af(N/b)<cf(N)$ for some constant $c<1$ and all sufficiently large $N$, then $T(N)=\Theta(f(N))$
+3. If $f(N)=\Theta(N^{\log_ba})$, then $T(N)=\Theta(N^{\log_b a}\log N)$
+
+- Master Method cannot cover all the cases of $f(N)$
+
+##### [Master Theorem] The recurrence $T(N)=aT(N/b)+f(N)$ can be solved as follows:
+
+1. If $af(N/b)=kf(N)$ for some constant $k<1$, then $T(N)=\Theta(f(N))$
+2. If $af(N/b)=Kf(N)$ for some constant $K>1$, then $T(N)=\Theta(N^{\log_b a})$
+3. If $af(N/b)=f(N)$, then $T(N)=\Theta(f(N)\log_b N)$
+
+##### [Theorem] The solution to the equation $T(N)=aT(N/b)+\Theta(N^k\log^pN)$ where $a\geq1$, $b>1$ and $p\geq0$ is
+
+$$
+T(N) =
+        \begin{cases}
+        O(N^{\log_b a})  & \text{if $a>b^k$} \\
+        O(N^k\log^{p+1}N) & \text{if $a=b^k$} \\
+        O(N^k\log^pN) & \text{if $a<b^k$}
+        \end{cases}
+$$
+
+<img src="picture/image-20210509130558970.png" alt="image-20210509130558970" style="zoom:80%;" />
 

@@ -49,14 +49,18 @@ Write the inverted index to disk; /*4*/
 
 - Process a word so that only its stem or root form is left. 
 
+<img src="picture/image-20210508162359043.png" alt="image-20210508162359043" style="zoom: 67%;" />
+
 #### Stop Words
 
-- Some words are so common that almost every document contains them, such as “a” “the” “it”.  It is useless to index them.  They are called stop words.  We can eliminate them from the original documents.
+- Some words are so common that almost every document contains them, such as “a” “the” “it”.  It is useless to index them.  They are called **stop words**.  We can eliminate them from the original documents.
 
 ### 3.6 Vocabulary Scanner and Insertor
 
 - Solution 1: Search trees(B- trees, B+ trees, Tries, …)
 - Solution 2: Hashing is faster for one word, but scanning in sequential order is not possible
+
+<img src="picture/image-20210508163733855.png" alt="image-20210508163733855" style="zoom:80%;" />
 
 ### 3.7 Memory Management
 
@@ -78,9 +82,11 @@ while ( read a document D )
     	Insert a node to T’s posting list;
     }
 }
-for ( i=0; i<BlockCnt; i++ )
+for ( i = 0; i < BlockCnt; i++ )
 	Merge( InvertedIndex, BlockIndex[i] );
 ```
+
+- 在写磁盘之前先排序，归并效率高
 
 ### 3.8 Distributed indexing
 
@@ -109,11 +115,16 @@ for ( i=0; i<BlockCnt; i++ )
 - Document: only retrieve the top $x$ documents where the documents are ranked by weight
   - Not feasible for Boolean queries
   - Can miss some relevant documents due to truncation
+  
 - Query: Sort the query terms by their frequency in ascending order; search according to only some percentage of the original query terms
+
+  <img src="picture/image-20210508163029245.png" alt="image-20210508163029245" style="zoom: 80%;" />
 
 ### 3.12 Measures for a search engine
 
 <img src="picture/image-20210319194234895.png" alt="image-20210319194234895" style="zoom:80%;" />
+
+<img src="picture/image-20210508163628653.png" alt="image-20210508163628653" style="zoom:80%;" />
 
 <img src="picture/image-20210319194057834.png" alt="image-20210319194057834" style="zoom:80%;" />
 
