@@ -102,3 +102,5 @@ T_\text{Find}(M,N)=O(\log N)
 $$
 
 > Note: The best choice of $M$ is **3** or **4**.
+
+<img src="picture/image-20210511190603002.png" alt="image-20210511190603002" style="zoom:80%;" />

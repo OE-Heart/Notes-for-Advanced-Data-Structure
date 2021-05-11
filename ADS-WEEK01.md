@@ -46,6 +46,10 @@
 
 > Note: Several bf’s might be changed even if we don’t need to reconstruct the tree.
 
+<img src="picture/image-20210511190639634.png" alt="image-20210511190639634" style="zoom:80%;" />
+
+The correct answer is A.
+
 #### The height of AVL Tree
 
 <img src="picture/image-20210302193145995.png" alt="image-20210302193145995" style="zoom:80%;" />

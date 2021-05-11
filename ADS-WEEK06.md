@@ -136,6 +136,8 @@ bool Backtracking (int i)
 
   Smaller $S_i$ first so we can cut a larger subtree if one doesn’t work
 
+<img src="picture/image-20210510010021467.png" alt="image-20210510010021467" style="zoom:80%;" />
+
 ### 6.5 Tic-tac-toe
 
 - The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.

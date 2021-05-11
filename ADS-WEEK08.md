@@ -175,3 +175,7 @@ void AllPairs(TwoDimArray A, TwoDimArray D, int N)
 - Recursively define the optimal values
 - Compute the values in some order
 - Reconstruct the solving strategy
+
+![image-20210511190733661](picture/image-20210511190733661.png)
+
+The correct answer is C.
