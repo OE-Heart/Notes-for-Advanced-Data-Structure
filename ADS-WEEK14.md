@@ -263,3 +263,4 @@ while (there is an element larger than M) {
 ```
 
 ##### [Theorem] The algorithm finds the maximum among n elements.  With very high probability it runs in $O(1)$ time and $O(n)$ work.  The probability of not finishing within this time and work complexity is $O(1/n^c)$ for some positive constant $c$
+
